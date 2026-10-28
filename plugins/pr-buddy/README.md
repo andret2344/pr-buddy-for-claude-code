@@ -44,7 +44,7 @@ claude plugin install pr-buddy@andret2344
 ```
 /pr-buddy:review <PR/MR link or number>
 /pr-buddy:respond <PR/MR link or number>
-/pr-buddy:check [PR/MR link or number] [--committed]
+/pr-buddy:check [PR/MR link or number] [--committed] [--full]
 ```
 
 ## Commands
@@ -81,13 +81,15 @@ Reviews your own branch or pull/merge request and lists the problems in the sess
 posting nothing.
 
 - It reads the working tree, uncommitted changes included; `--committed` limits it to HEAD.
+- Once a report exists, a run reviews only the files changed since the commit the report names; `--full` reviews
+  every changed file again. A rebase or a change to your guidelines makes the run full on its own.
 - On the default branch with no PR/MR (`main`), it reviews only the uncommitted changes and suggests moving them to a
   branch of their own.
 - A feature with no test is blocking, unless it cannot be tested or a test is not worth its setup; those it lets go
   are listed with the reason. In a repository with no tests at all, it suggests adding some instead. When the
   repository configures a coverage tool, it asks whether to run the tests with coverage.
 - The report holds the open findings and the features let go without a test, and `check` offers to delete it once the
-  PR/MR is merged or closed or the branch is gone.
+  PR/MR is merged or closed or the branch is gone. It looks for such leftovers on a full run, or when you ask.
 - The points you talk it out of go into `.review/waivers.md`, shared by every branch, and come back when the code they
   rely on changes.
 - Git must ignore `.review/`; the first run hands you the command, for bash and for PowerShell, best done once for the

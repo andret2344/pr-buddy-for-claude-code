@@ -6,7 +6,7 @@ Every call goes through `gh`. Below, `{o}/{r}` is the repository and `{n}` the P
 
 - **You:** `gh api user --jq .login`.
 - **PR of a branch:** here `{o}/{r}` is the branch's own remote, from `git remote get-url "$(git config branch.{branch}.remote)"`. Run `gh pr list -R {o}/{r} --head {branch} --state open --json number,author,headRepositoryOwner`. `--head` matches the branch name in forks too, so keep only the PRs whose `headRepositoryOwner.login` is `{o}`, both lowercased: GitHub logins ignore case, remote URLs keep whatever case was typed. When `{o}/{r}` is a fork, its PRs live in the parent: `gh api repos/{o}/{r} --jq '.parent.full_name // empty'` names it, and the same list with the same filter runs there too. A plain `gh pr view` finds a fork's PR only when an `upstream` remote exists, so it is no substitute.
-- **Metadata:** `gh pr view {n} -R {o}/{r} --json number,url,title,body,author,state,isDraft,headRefName,headRefOid,baseRefName,baseRefOid`.
+- **Metadata:** `gh pr view {n} -R {o}/{r} --json number,url,title,body,author,state,isDraft,headRefName,headRefOid,baseRefName`. The base commit comes from `gh api repos/{o}/{r}/pulls/{n} --jq .base.sha`: older `gh` releases reject `--json baseRefOid`.
 - **Diff:** `gh pr diff {n} -R {o}/{r}`. Line anchors must land in this diff, so take it from here; read the surrounding code from the local clone.
 - **Threads:**
   ```graphql

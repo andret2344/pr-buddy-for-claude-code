@@ -9,6 +9,7 @@ Issues and pull requests are welcome.
   - `.claude-plugin/plugin.json`: the manifest, next to the icon its `icon` field names.
   - `skills/<name>/SKILL.md`: one file per command, holding the steps.
   - `reference/`: material the skills point at: platform APIs, the sending gate, voice, history, guideline mining.
+  - `scripts/`: read-only Bash helpers a skill runs to gather local facts in one call. They run git and read files only; every `gh` and `glab` call stays in the platform references.
   - `README.md`: the full user documentation, also shown as the directory listing. The `README.md` at the repository root is a short landing page that links to it.
 - `LICENSE` and `NOTICE` exist twice, at the repository root for GitHub and in `plugins/pr-buddy/` for every copy of the plugin. CI fails when the two copies differ.
 

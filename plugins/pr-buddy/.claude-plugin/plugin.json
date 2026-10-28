@@ -1,6 +1,6 @@
 {
   "name": "pr-buddy",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Review pull requests and merge requests on GitHub and GitLab and answer reviews of your own, posting under your name only after explicit approval; check your own work locally without posting anything.",
   "author": {
     "name": "andret2344"
